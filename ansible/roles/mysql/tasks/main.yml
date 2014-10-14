@@ -1,0 +1,15 @@
+ - name: Install mysql
+   apt: name={{ item }} state=present
+   with_items:
+     - mysql-server
+     - php5-fpm
+     - phpmyadmin
+
+ - name: Mysql root password 
+ - mysql_user: name=root password=123456
+
+ - name: Configure phpmyadmin
+   template: src=nginx_phpmyadmin.j2 dest=/etc/nginx/conf.d/nginx_phpmyadmin.conf owner=root group=root mode=0644
+   when: nginx|success
+   notify:
+     - restart nginx

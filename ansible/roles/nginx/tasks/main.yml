@@ -1,0 +1,14 @@
+ - name: Install nginx
+   apt: name=nginx state=present
+   register: nginx
+
+ #- name: Install SSL Certs
+ #  copy: src={{ item.src }} dest={{ item.dest }} owner=root group={{ item.group }} mode={{ item.mode }}
+ #  with_items:
+ #    - { src: test.pem, dest: /etc/ssl/certs, mode: 644 , group: root }
+ #    - { src: test.key, dest: /etc/ssl/private, mode: 640, group: ssl-cert }
+
+ #- name: Configure Nginx
+ #  template: src=nginx_odoo.j2 dest=/etc/nginx/conf.d/nginx_odoo.conf owner=root group=root mode=0644
+ #  notify:
+ #    - restart nginx
