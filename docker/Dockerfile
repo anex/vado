@@ -21,10 +21,20 @@ EXPOSE 22
 
 CMD /usr/bin/supervisord -n
 
-#Openerp 7
-RUN apt-get install -y postgresql postgresql-client python-dateutil python-docutils python-feedparser python-gdata python-imaging python-jinja2 python-ldap python-libxslt1 python-lxml python-mako python-mock python-openid python-psutil python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-unittest2 python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi --force-yes
+##############################################################################
+# Postgresql
 
-#RUN su - postgres -c "createuser -s openerp" 2> /dev/null || true
+RUN apt-get install -y postgresql --force-yes
+
+
+##############################################################################
+
+##############################################################################
+#Openerp 7
+RUN service postgresql start && su - postgres -c "createuser -s openerp"
+
+RUN apt-get install -y postgresql-client python-dateutil python-docutils python-feedparser python-gdata python-imaging python-jinja2 python-ldap python-libxslt1 python-lxml python-mako python-mock python-openid python-psutil python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-unittest2 python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi --force-yes
+
 
 ADD openerp_7.0-20140804-231303-1_all.deb /opt/openerp_7.0-20140804-231303-1_all.deb
 
@@ -34,13 +44,20 @@ ADD openerp-server.conf /etc/openerp/openerp-server.conf
 
 RUN easy_install prestapyt mandrill
 
-EXPOSE 8069
+##############################################################################
 
-##OpenERP 8
+##############################################################################
+#OpenERP 8
+#RUN service postgresql start && su - postgres -c "createuser -s odoo"
+#
 #RUN echo "deb http://nightly.odoo.com/8.0/nightly/deb/ ./" >> /etc/apt/sources.list
 #
 #RUN apt-get update
 #
 #RUN apt-get install -y odoo --force-yes
+#
+#ADD odoo-server.conf /etc/odoo/openerp-server.conf
 
-#ONBUILD ADD addons /opt/openerp/addons
+##############################################################################
+
+EXPOSE 8069
