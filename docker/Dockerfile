@@ -60,13 +60,13 @@ RUN echo "deb http://nightly.odoo.com/8.0/nightly/deb/ ./" >> /etc/apt/sources.l
 
 RUN apt-get update
 
-RUN apt-get install -y odoo --force-yes
+RUN apt-get install -y odoo xfonts-utils xfonts-base xfonts-75dpi --force-yes
 
 ADD odoo-server.conf /etc/odoo/openerp-server.conf
 
-ADD wkhtmltox-0.12.1_linux-precise-i386.deb /opt/openerp/wkhtmltox-0.12.1_linux-precise-i386.deb
+ADD wkhtmltox-0.12.2_linux-wheezy-amd64.deb /opt/openerp/wkhtmltox-0.12.2_linux-wheezy-amd64.deb
 
-RUN dpkg -i /opt/openerp/wkhtmltox-0.12.1_linux-precise-i386.deb
+RUN dpkg -i /opt/openerp/wkhtmltox-0.12.2_linux-wheezy-amd64.deb
 
 ##############################################################################
 
