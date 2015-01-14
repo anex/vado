@@ -64,6 +64,10 @@ RUN apt-get install -y odoo --force-yes
 
 ADD odoo-server.conf /etc/odoo/openerp-server.conf
 
+ADD wkhtmltox-0.12.1_linux-precise-i386.deb /opt/openerp/wkhtmltox-0.12.1_linux-precise-i386.deb
+
+RUN dpkg -i /opt/openerp/wkhtmltox-0.12.1_linux-precise-i386.deb
+
 ##############################################################################
 
 EXPOSE 8069
